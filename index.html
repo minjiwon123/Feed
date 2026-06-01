@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>서울예술대학교 - 피드백 데이</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        scroll-behavior: smooth;
+      }
+      .modal-bg {
+        backdrop-filter: blur(8px);
+        transition: all 0.3s ease;
+      }
+      /* 가로 스크롤바 숨기기 */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#F8F9FA] text-[#111111] min-h-screen antialiased selection:bg-[#8E6CEF] selection:text-white"
+  >
+    <header
+      class="w-full max-w-7xl mx-auto px-6 py-4 flex justify-between items-center bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100/50"
+    >
+      <div
+        class="flex items-center gap-3 cursor-pointer"
+        onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      >
+        <div
+          class="w-9 h-9 bg-[#C21E3A] rounded-full flex items-center justify-center text-white font-bold text-sm tracking-tighter"
+        >
+          M
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-sm tracking-tight leading-tight"
+            >서울예술대학교</span
+          >
+          <span
+            class="text-[10px] text-gray-400 font-normal tracking-wide uppercase"
+            >Seoul Institute of the Arts</span
+          >
+        </div>
+      </div>
+      <nav
+        class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600"
+      >
+        <button
+          onclick="openInfoView('about')"
+          class="hover:text-purple-600 transition cursor-pointer"
+        >
+          피드백 데이란?
+        </button>
+        <button
+          onclick="openInfoView('mentor')"
+          class="hover:text-purple-600 transition cursor-pointer"
+        >
+          멘토 소개
+        </button>
+        <button
+          onclick="openInfoView('process')"
+          class="hover:text-purple-600 transition cursor-pointer"
+        >
+          참여 방법
+        </button>
+        <a href="#gallery-section" class="hover:text-purple-600 transition"
+          >지난 이야기</a
+        >
+        <button
+          onclick="openInfoView('faq')"
+          class="hover:text-purple-600 transition cursor-pointer"
+        >
+          FAQ
+        </button>
+      </nav>
+      <button
+        onclick="openApplyModal()"
+        class="bg-[#111111] text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-purple-600 transition cursor-pointer shadow-sm"
+      >
+        신청하기
+      </button>
+    </header>
+
+    <main
+      class="w-full max-w-7xl mx-auto px-6 py-10 lg:py-16 relative overflow-hidden"
+    >
+      <div
+        class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#D6C4F0]/20 rounded-full filter blur-3xl -z-10"
+      ></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5 space-y-8 z-10">
+          <div class="space-y-3">
+            <p
+              class="text-[#7F56D9] font-serif italic text-3xl md:text-4xl tracking-tight"
+            >
+              Feedback Day
+            </p>
+            <h1
+              class="text-5xl md:text-6xl font-black tracking-tighter leading-[1.15] text-gray-900"
+            >
+              피드백 데이
+            </h1>
+          </div>
+          <div
+            class="space-y-2 bg-white/40 p-4 rounded-2xl border border-purple-100/50 backdrop-blur-xs"
+          >
+            <p class="text-purple-900 text-lg md:text-xl font-bold">
+              💡 평가가 아닌 가능성의 발견.
+            </p>
+            <p
+              class="text-gray-600 text-sm md:text-base font-light leading-relaxed"
+            >
+              서울예술대학교 공식 6개 학부 15개 전공 교수진이 여러분의 미완성
+              초안을 1:1로 직접 마주하며, 작품의 독창적 가치와 성장 가능성을
+              함께 발굴합니다.
+            </p>
+          </div>
+          <div class="flex items-center gap-4 pt-2">
+            <button
+              onclick="openApplyModal()"
+              class="bg-[#111111] text-white px-8 py-4 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-purple-600 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/10 cursor-pointer"
+            >
+              신청하기 <span class="text-lg">➔</span>
+            </button>
+            <button
+              onclick="openModal('video-modal')"
+              class="border border-gray-200 bg-white/80 backdrop-blur-sm text-gray-700 px-7 py-4 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white hover:border-purple-300 transition-all shadow-sm cursor-pointer"
+            >
+              행사 안내 영상 <span class="text-xs ml-1 text-purple-600">▶</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 relative flex justify-center items-center">
+          <div
+            class="relative w-full max-w-2xl transform lg:scale-110 lg:translate-x-6 transition-transform duration-700 ease-out"
+          >
+            <img
+              src="image_ee8645.png"
+              alt="피드백 데이 디자인 콜라주"
+              class="w-full h-auto object-contain drop-shadow-[0_25px_25px_rgba(0,0,0,0.08)]"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section
+      class="w-full max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-12 gap-6"
+    >
+      <div
+        id="process-section"
+        onclick="openInfoView('process')"
+        class="bg-white rounded-3xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-gray-100 md:col-span-5 flex flex-col justify-between cursor-pointer hover:border-purple-300 hover:shadow-md transition-all group"
+      >
+        <div class="flex justify-between items-start">
+          <div>
+            <h3
+              class="text-lg font-bold text-gray-900 leading-snug group-hover:text-purple-600 transition-colors"
+            >
+              🛠 참여 방법
+            </h3>
+            <p class="text-xs text-purple-500 font-normal mt-0.5">
+              자세히 보려면 카드를 클릭하세요
+            </p>
+          </div>
+          <span
+            class="text-gray-300 group-hover:text-purple-600 text-xl transition-colors"
+            >➔</span
+          >
+        </div>
+        <div
+          class="grid grid-cols-4 gap-2 pt-10 text-center relative pointer-events-none"
+        >
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-11 h-11 bg-purple-50 rounded-full flex items-center justify-center border border-purple-100 text-base shadow-sm"
+            >
+              📝
+            </div>
+            <p class="text-[10px] text-gray-500 font-bold leading-tight">
+              01. 초안 제출
+            </p>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-11 h-11 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100 text-base shadow-sm"
+            >
+              💬
+            </div>
+            <p class="text-[10px] text-gray-500 font-medium leading-tight">
+              02. 1:1 멘토링
+            </p>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-11 h-11 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100 text-base shadow-sm"
+            >
+              💡
+            </div>
+            <p class="text-[10px] text-gray-500 font-medium leading-tight">
+              03. 확장변형
+            </p>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-11 h-11 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100 text-base shadow-sm"
+            >
+              ✨
+            </div>
+            <p class="text-[10px] text-gray-500 font-medium leading-tight">
+              04. 방향성 확립
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mentor-section"
+        class="bg-white rounded-3xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-gray-100 md:col-span-4 flex flex-col justify-between"
+      >
+        <div>
+          <h3 class="text-lg font-bold text-gray-900 mb-1">
+            👨‍🎨 15개 전공별 크리틱 핵심
+          </h3>
+          <p class="text-xs text-gray-500 leading-relaxed">
+            전공 아이콘을 클릭하면 세부 피드백 요소를 확인할 수 있습니다.
+          </p>
+        </div>
+        <div class="pt-4">
+          <div
+            class="flex items-center gap-3 overflow-x-auto pb-2 no-scrollbar"
+          >
+            <script>
+              const depts = [
+                {
+                  n: '연극',
+                  f: '공연학부',
+                  i: '🎭',
+                  c: '무대 스페이스 입체 연출, 배역 간의 연기 동선 및 희곡 텐션 강약 조절 코칭',
+                },
+                {
+                  n: '무용',
+                  f: '공연학부',
+                  i: '🩰',
+                  c: '무대 공간 구조를 고려한 대안 안무 동선 스케치 및 독무 움직임선 교정',
+                },
+                {
+                  n: '연기',
+                  f: '공연학부',
+                  i: '🎬',
+                  c: '독백 대사 화술 디자인, 캐릭터 분석 법 및 입시 독백 매력 극대화 크리틱',
+                },
+                {
+                  n: '영화',
+                  f: '영상학부',
+                  i: '🎥',
+                  c: '단편영화 씬 연출 가이드, 인카메라 워크 테크닉 및 미장센 상징성 부여 팁',
+                },
+                {
+                  n: '방송영상',
+                  f: '영상학부',
+                  i: '📺',
+                  c: 'OTT·유튜브 숏폼 트렌드 편집 매커니즘, 사운드 믹싱 및 핵심 후킹 흐름 코칭',
+                },
+                {
+                  n: '디지털아트',
+                  f: '영상학부',
+                  i: '👾',
+                  c: '게임 그래픽 콘셉트, 실시간 센서 연동 인터랙티브 미디어아트 매커니즘 조언',
+                },
+                {
+                  n: '한국음악',
+                  f: '음악학부',
+                  i: '🎻',
+                  c: '전통 국악 선율 뼈대 구성법 및 현대 악기·루프스테이션 크로스오버 조율 조언',
+                },
+                {
+                  n: '실용음악',
+                  f: '음악학부',
+                  i: '🎵',
+                  c: '화성학 기반 보컬 탑라인 멜로디 작곡 작사, 코드 프로그레션 및 트렌디 프로듀싱',
+                },
+                {
+                  n: '문예창작',
+                  f: '문예학부',
+                  i: '✍️',
+                  c: '순수문학 소설·시 실기 전형 핵심 문체 호흡 교정 및 독창적 문학 소재 발굴',
+                },
+                {
+                  n: '극작',
+                  f: '문예학부',
+                  i: '📝',
+                  c: '드라마/웹툰/뮤지컬 시나리오 스토리 아크 아키텍처 및 빌드업 플롯 가이드',
+                },
+                {
+                  n: '시각디자인',
+                  f: '디자인학부',
+                  i: '🎨',
+                  c: '타이포그래피 배치 시스템, 그래픽 브랜딩 및 포스터 비주얼 아이덴티티 크리틱',
+                },
+                {
+                  n: '사진',
+                  f: '디자인학부',
+                  i: '📸',
+                  c: '스튜디오 인공 광원 콘트라스트 활용, 앵글 설계 및 포트폴리오 셀렉 가이드',
+                },
+                {
+                  n: '공간디자인',
+                  f: '디자인학부',
+                  i: '🏛️',
+                  c: '무대 미술 미술 세트 투시도 입체화 공간 확장 및 공간 브랜딩 디자인 조언',
+                },
+                {
+                  n: '광고창작',
+                  f: '커뮤니케이션학부',
+                  i: '💡',
+                  c: '크리에이티브 기획서 엣지 강화, 타겟 분석 스페이스 및 임팩트 숏 카피라이팅',
+                },
+                {
+                  n: '예술경영',
+                  f: '커뮤니케이션학부',
+                  i: '📊',
+                  c: '공연·콘서트 기획 마케팅 예산 책정 및 프로덕션 제작 파이프라인 설계 피드백',
+                },
+              ];
+              depts.forEach((d) => {
+                document.write(`
+                                <div class="flex flex-col items-center min-w-[55px] cursor-pointer group" onclick="openReviewModal('${d.n}전공 크리틱 지표', '${d.c}')">
+                                    <div class="w-10 h-10 bg-purple-50 rounded-full border-2 border-white shadow-sm flex items-center justify-center text-sm group-hover:bg-purple-600 group-hover:text-white transition-all">${d.i}</div>
+                                    <span class="text-[9px] text-gray-600 font-bold mt-1 tracking-tighter truncate w-full text-center">${d.n}</span>
+                                </div>
+                            `);
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-[#8E6CEF] text-white rounded-3xl p-8 shadow-md md:col-span-3 flex flex-col justify-between relative overflow-hidden group cursor-pointer"
+        onclick="openAllReviewsModal()"
+      >
+        <div class="space-y-3">
+          <p class="text-base font-semibold leading-snug">
+            "입시 학원에서 늘 주눅 들었던 제 초안이, 서울예대에서 빛나는
+            원석이라는 피드백을 받았어요."
+          </p>
+          <p class="text-[11px] text-purple-100/80 font-light">
+            - 2025 참가자 합격 수기 중
+          </p>
+        </div>
+        <div
+          class="pt-5 border-t border-purple-400/50 flex justify-between items-center mt-4"
+        >
+          <span class="text-xs font-bold text-white group-hover:underline"
+            >💬 지난 후기 전체 읽기</span
+          >
+          <span
+            class="text-sm transform group-hover:translate-x-1 transition-transform"
+            >➔</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery-section" class="w-full max-w-7xl mx-auto px-6 py-12">
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6"
+      >
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 tracking-tight">
+            지난 피드백 성공 사례 아카이브
+          </h2>
+          <p class="text-xs text-gray-500 mt-0.5">
+            학부 탭을 선택하고 카드를 클릭하면 상세한 비포&애프터가 제공됩니다.
+          </p>
+        </div>
+        <div
+          class="flex gap-2 overflow-x-auto w-full md:w-auto no-scrollbar py-1"
+        >
+          <button
+            onclick="filterGallery('all')"
+            class="gallery-tab-btn active bg-purple-600 text-white text-xs px-3.5 py-1.5 rounded-full font-medium cursor-pointer"
+          >
+            전체보기
+          </button>
+          <button
+            onclick="filterGallery('공연학부')"
+            class="gallery-tab-btn bg-white border border-gray-200 text-gray-600 text-xs px-3.5 py-1.5 rounded-full font-medium hover:bg-gray-50 cursor-pointer"
+          >
+            공연
+          </button>
+          <button
+            onclick="filterGallery('영상학부')"
+            class="gallery-tab-btn bg-white border border-gray-200 text-gray-600 text-xs px-3.5 py-1.5 rounded-full font-medium hover:bg-gray-50 cursor-pointer"
+          >
+            영상
+          </button>
+          <button
+            onclick="filterGallery('음악학부')"
+            class="gallery-tab-btn bg-white border border-gray-200 text-gray-600 text-xs px-3.5 py-1.5 rounded-full font-medium hover:bg-gray-50 cursor-pointer"
+          >
+            음악
+          </button>
+          <button
+            onclick="filterGallery('문예학부')"
+            class="gallery-tab-btn bg-white border border-gray-200 text-gray-600 text-xs px-3.5 py-1.5 rounded-full font-medium hover:bg-gray-50 cursor-pointer"
+          >
+            문예
+          </button>
+          <button
+            onclick="filterGallery('디자인학부')"
+            class="gallery-tab-btn bg-white border border-gray-200 text-gray-600 text-xs px-3.5 py-1.5 rounded-full font-medium hover:bg-gray-50 cursor-pointer"
+          >
+            디자인
+          </button>
+          <button
+            onclick="filterGallery('커뮤니케이션학부')"
+            class="gallery-tab-btn bg-white border border-gray-200 text-gray-600 text-xs px-3.5 py-1.5 rounded-full font-medium hover:bg-gray-50 cursor-pointer"
+          >
+            커뮤니케이션
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="gallery-grid"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4"
+      ></div>
+    </section>
+
+    <section
+      class="w-full max-w-7xl mx-auto px-6 pb-24 pt-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-t border-gray-200/60 mt-12"
+    >
+      <div>
+        <h3
+          class="text-2xl font-black text-gray-900 tracking-tight leading-tight"
+        >
+          다음 피드백 데이의<br />주인공은 당신입니다.
+        </h3>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          onclick="openApplyModal()"
+          class="bg-[#111111] text-white px-8 py-4 rounded-full font-bold text-sm tracking-wide shadow-md hover:bg-purple-600 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
+        >
+          지금 신청하기 <span class="text-base">➔</span>
+        </button>
+        <div
+          class="text-4xl select-none animate-bounce"
+          style="animation-duration: 2s"
+        >
+          😊
+        </div>
+      </div>
+    </section>
+
+    <div
+      id="info-view-overlay"
+      class="fixed inset-0 bg-[#F8F9FA] z-50 overflow-y-auto hidden transform translate-y-full transition-transform duration-300 ease-out"
+    >
+      <div
+        class="bg-white border-b border-gray-100 sticky top-0 px-6 py-4 flex justify-between items-center shadow-xs"
+      >
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-purple-600 rounded-full animate-ping"></span>
+          <h2 id="view-header-title" class="text-base font-bold text-gray-900">
+            상세 보기
+          </h2>
+        </div>
+        <button
+          onclick="closeInfoView()"
+          class="bg-gray-100 hover:bg-red-500 hover:text-white px-4 py-2 rounded-full text-xs font-bold transition cursor-pointer"
+        >
+          ✕ 닫고 메인으로 돌아가기
+        </button>
+      </div>
+      <div class="max-w-4xl mx-auto px-6 py-12" id="view-body-content"></div>
+    </div>
+
+    <div
+      id="apply-modal"
+      class="fixed inset-0 bg-black/50 z-50 modal-bg hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl space-y-6 transform scale-95 transition-all duration-300 max-h-[90vh] overflow-y-auto"
+      >
+        <div
+          class="flex justify-between items-center border-b border-gray-100 pb-4"
+        >
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">
+              2026 서울예대 피드백 신청
+            </h3>
+            <p class="text-xs text-purple-600 mt-0.5">
+              공식 6개 학부 15개 전공 멘토단 매칭 시스템
+            </p>
+          </div>
+          <button
+            onclick="closeModal('apply-modal')"
+            class="text-gray-400 hover:text-black text-2xl font-light cursor-pointer"
+          >
+            &times;
+          </button>
+        </div>
+        <form onsubmit="submitForm(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1"
+              >지원자 이름 *</label
+            >
+            <input
+              type="text"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 text-sm"
+              placeholder="이름을 입력하세요"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1"
+              >신청 학과 선택 (전문학사 15개 과정) *</label
+            >
+            <select
+              id="modal-dept-select"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 text-sm bg-white"
+            ></select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1"
+              >미완성 아이디어 및 작업 단계 설명 *</label
+            >
+            <textarea
+              required
+              rows="3"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 text-sm resize-none"
+              placeholder="고민 중인 뼈대 구성과 발전시키고 싶은 포인트를 적어주세요."
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-[#111111] hover:bg-purple-600 text-white font-bold py-4 rounded-xl text-sm transition mt-2 cursor-pointer shadow-md"
+          >
+            피드백 신청 완료하기
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div
+      id="video-modal"
+      class="fixed inset-0 bg-black/50 z-50 modal-bg hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="max-w-3xl w-full aspect-video bg-black rounded-2xl overflow-hidden relative shadow-2xl"
+      >
+        <button
+          onclick="closeModal('video-modal')"
+          class="absolute top-4 right-4 text-white text-3xl font-light z-10 bg-black/40 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
+        >
+          &times;
+        </button>
+        <div
+          class="w-full h-full flex flex-col items-center justify-center text-white bg-gradient-to-tr from-purple-950 to-neutral-900"
+        >
+          <div
+            class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-xl animate-pulse cursor-pointer"
+          >
+            ▶
+          </div>
+          <p class="font-bold text-sm mt-4">
+            서울예술대학교 크리틱 피드백 데이 하이라이트
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="detail-modal"
+      class="fixed inset-0 bg-black/50 z-50 modal-bg hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl space-y-5"
+      >
+        <div
+          class="flex justify-between items-start border-b border-gray-100 pb-3"
+        >
+          <h3 id="detail-title" class="text-base font-bold text-gray-900">
+            상세 가이드
+          </h3>
+          <button
+            onclick="closeModal('detail-modal')"
+            class="text-gray-400 hover:text-black text-2xl font-light cursor-pointer"
+          >
+            &times;
+          </button>
+        </div>
+        <div
+          id="detail-content"
+          class="text-sm text-gray-600 leading-relaxed bg-gray-50 p-5 rounded-2xl border border-gray-100 max-h-[40vh] overflow-y-auto"
+        ></div>
+        <button
+          onclick="closeModal('detail-modal')"
+          class="w-full bg-gray-900 hover:bg-purple-600 text-white font-medium py-3 rounded-xl text-sm transition cursor-pointer"
+        >
+          확인
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // 15개 학과 리얼 매칭 성공 데이터셋 구조
+      const workData = [
+        {
+          id: 1,
+          faculty: '공연학부',
+          name: '연극',
+          title: '무대 희곡 및 연출 콘셉트 시안',
+          kw: '극적 긴장감 및 공간 최적화',
+          detail:
+            '<b>피드백 결과:</b> 인물 간의 동선이 겹쳐 평면적이던 독백 연출을 계단형 사선 동선 레이아웃으로 변경 유도.',
+        },
+        {
+          id: 2,
+          faculty: '공연학부',
+          name: '무용',
+          title: '순수 무용 창작 안무선 가이드',
+          kw: '신체 축 및 입체 동선 확장',
+          detail:
+            '<b>피드백 결과:</b> 제자리 위주의 정형화된 동작 라인업을 무대 전체 상하좌우를 대각선으로 크게 쓰는 포메이션으로 교정.',
+        },
+        {
+          id: 3,
+          faculty: '공연학부',
+          name: '연기',
+          title: '입시용 자유독백 대사 영상',
+          kw: '화술 호흡 점 및 감정선 교정',
+          detail:
+            '<b>피드백 결과:</b> 톤이 과하게 붕 떠서 분출되던 감정선을 내면의 응축된 연기 템포로 조율해 대사 시인성 확보.',
+        },
+        {
+          id: 4,
+          faculty: '영상학부',
+          name: '영화',
+          title: '단편영화 인트로 시놉시스',
+          kw: '미장센 및 씬 연출 가이드',
+          detail:
+            '<b>피드백 결과:</b> 기승전결 중 결말이 모호했던 시놉시스를 상징적 오브제 소품을 도입해 서사의 기믹 완결성 부여.',
+        },
+        {
+          id: 5,
+          faculty: '영상학부',
+          name: '방송영상',
+          title: '다큐멘터리 예능 기획 구성안',
+          kw: '이탈 방지 3초 후킹 컷 연출',
+          detail:
+            '<b>피드백 결과:</b> 다소 설명조로 길고 루즈했던 인트로 인터뷰 배치를 전면 요약 가이드하고 하이라이트 선배치 유도.',
+        },
+        {
+          id: 6,
+          faculty: '영상학부',
+          name: '디지털아트',
+          title: '인터랙티브 미디어 인스톨 가이드',
+          kw: '모션 센서 아두이노 최적화',
+          detail:
+            '<b>피드백 결과:</b> 반응이 딜레이되던 관객 모션 인식 시스템의 딜레이 프레임워크 보정 코드 조언.',
+        },
+        {
+          id: 7,
+          faculty: '음악학부',
+          name: '한국음악',
+          title: '가야금·루프스테이션 국악 크로스오버',
+          kw: '국악 5음 음계 주파수 조율',
+          detail:
+            '<b>피드백 결과:</b> 현대 전자 이펙터 소스 속에서 국악 고유의 음계가 묻히던 현상을 주파수 이퀄라이징 파트 분할로 보정.',
+        },
+        {
+          id: 8,
+          faculty: '음악학부',
+          name: '실용음악',
+          title: '알앤비 팝 자작곡 미디 데모',
+          kw: '세컨더리 도미넌트 대리코드 매칭',
+          detail:
+            '<b>피드백 결과:</b> 단조롭게 무한 루프되던 4코드 머니코드 진행 위에 브릿지 반전용 대리코드를 삽입하여 고조감 완성.',
+        },
+        {
+          id: 9,
+          faculty: '문예학부',
+          name: '문예창작',
+          title: '순수문학 소설 시놉시스 초고',
+          kw: '문체 리듬 및 플롯 왜곡 크리틱',
+          detail:
+            '<b>피드백 결과:</b> 지루하던 연대기식 연대 배열 구성을 주인공의 시점 변화를 담은 추적식 구성으로 변형 유도.',
+        },
+        {
+          id: 10,
+          faculty: '문예학부',
+          name: '극작',
+          title: '웹툰·웹소설 1화 스토리 콘티',
+          kw: '가독성 호흡 및 극적 웹 컷 분할',
+          detail:
+            '<b>피드백 결과:</b> 설명조 대사량을 40% 이상 세련되게 압축하고, 극적 스릴을 주는 엔딩 컷의 비주얼 스케일 확대 지시.',
+        },
+        {
+          id: 11,
+          faculty: '디자인학부',
+          name: '시각디자인',
+          title: '브랜드 아이덴티티 포스터 그래픽',
+          kw: '그리드 정렬 및 타이포 시인성',
+          detail:
+            '<b>피드백 결과:</b> 모바일 화면 가독성에 문제가 있던 미세 선 장식 엠블럼을 벡터 스케일링 그리드를 통해 전면 간결화.',
+        },
+        {
+          id: 12,
+          faculty: '디자인학부',
+          name: '사진',
+          title: '인물 포트폴리오 스튜디오 컷 시안',
+          kw: '컨트라스트 광원 방향 디렉션',
+          detail:
+            '<b>피드백 결과:</b> 사진에 렘브란트식 거친 사이드 인공 조명 기법 접목을 설계 유도.',
+        },
+        {
+          id: 13,
+          faculty: '디자인학부',
+          name: '공간디자인',
+          title: '무대 미술 미술 세트 3D 랜더링',
+          kw: '사선 투시 뷰 공간 확장',
+          detail:
+            '<b>피드백 결과:</b> 전면 정면 구조를 탈피하여 객석 전역에서 연출의 가시성이 깊이감 있게 전달되도록 세트 중심 틀 조정.',
+        },
+        {
+          id: 14,
+          faculty: '커뮤니케이션학부',
+          name: '광고창작',
+          title: '캠페인 영상 숏 카피라이팅 기안',
+          kw: '한 줄 은유형 헤드카피 도출',
+          detail:
+            '<b>피드백 결과:</b> 사실만을 길게 나열하던 서술조 제목을 비유적 은유가 가미된 세련된 한 줄 슬로건 문체로 전면 개정.',
+        },
+        {
+          id: 15,
+          faculty: '커뮤니케이션학부',
+          name: '예술경영',
+          title: '콘서트 페스티벌 러프 기획서 메모',
+          kw: '마케팅 타겟팅 분배 설계',
+          detail:
+            '<b>피드백 결과:</b> 콘텐츠에만 치우쳐 누락되어있던 초기 모객 마케팅 타겟팅 분배 및 제작 타임라인을 정량적 설계 보정.',
+        },
+      ];
+
+      // [새 창 레이어 기능] 네비게이션 및 참여방법 전용 모듈형 콘텐츠 맵핑 시스템
+      function openInfoView(type) {
+        const overlay = document.getElementById('info-view-overlay');
+        const title = document.getElementById('view-header-title');
+        const body = document.getElementById('view-body-content');
+
+        overlay.classList.remove('hidden');
+        setTimeout(() => overlay.classList.remove('translate-y-full'), 10);
+        document.body.style.overflow = 'hidden';
+
+        if (type === 'about') {
+          title.textContent = '✨ 피드백 데이란 어떤 행사인가요?';
+          body.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="h-48 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl flex items-center justify-center text-white text-2xl font-black">평가가 아닌 무한한 가능성을 봅니다.</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mt-4">프로그램 상세 안내</h3>
+                        <p class="text-gray-600 leading-relaxed font-light">피드백 데이는 서울예술대학교 공식 전문학사 과정 15개 전공이 모두 결집하여 개최하는 연간 가장 큰 크리틱 워크숍입니다. 기존 입시 시선에서 '합격/불합격'의 잣대로 잘라내던 방식에서 벗어나, 창작물 자체의 원석 같은 가치와 무한한 전공 융합 확장성을 설계합니다.</p>
+                    </div>`;
+        } else if (type === 'mentor') {
+          title.textContent = '👩‍🎨 15개 학부 전공 대표 멘토 라인업';
+          let mentorHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+          depts.forEach((d) => {
+            mentorHTML += `
+                        <div class="p-5 bg-white border border-gray-100 rounded-2xl shadow-xs">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-lg">${d.i}</div>
+                                <div>
+                                    <p class="font-bold text-sm text-gray-900">${d.n}전공 멘토단</p>
+                                    <p class="text-[11px] text-purple-600">${d.f} 소속</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-3 bg-gray-50 p-2.5 rounded-lg border border-gray-100">${d.c}</p>
+                        </div>`;
+          });
+          mentorHTML += `</div>`;
+          body.innerHTML = mentorHTML;
+        } else if (type === 'process') {
+          title.textContent = '🛠 피드백 데이 프로세스 (참여 방법 상세)';
+          body.innerHTML = `
+                    <div class="space-y-8">
+                        <div class="border-l-4 border-purple-600 pl-4 space-y-2">
+                            <h4 class="text-lg font-bold text-purple-900">STEP 01. 미완성 초안 온라인 접수</h4>
+                            <p class="text-sm text-gray-600 font-light">양식이나 분량, 완성도에 대한 압박을 전혀 가지실 필요 없습니다. 스마트폰 음성 메모 파일, 러프한 스케치 낙서, 메모장에 휘갈긴 시놉시스 등 전공 연관성이 있는 초안 상태라면 무엇이든 업로드 가능합니다.</p>
+                        </div>
+                        <div class="border-l-4 border-purple-600 pl-4 space-y-2">
+                            <h4 class="text-lg font-bold text-purple-900">STEP 02. 매칭 1:1 디렉팅 세션</h4>
+                            <p class="text-sm text-gray-600 font-light">접수된 초안은 서울예대 공식 전공 교수진 및 핵심 합격생 선배 크루에게 전달됩니다. 배정 완료 후 실시간 매칭 화상 줌(ZOOM) 혹은 오프라인 대면 크리틱 세션을 통해 1:1로 집중 피드백을 전달받습니다.</p>
+                        </div>
+                        <div class="border-l-4 border-purple-600 pl-4 space-y-2">
+                            <h4 class="text-lg font-bold text-purple-900">STEP 03. 융합 아이디어 확장 구현</h4>
+                            <p class="text-sm text-gray-600 font-light">나 혼자서 창작할 때는 전혀 보이지 않던 연출 구멍, 화성학적 한계, 디자인 스케일링 레이아웃 부재 요소들을 멘토의 실질적인 팁과 소스 제안을 통해 입체적으로 빌드업 시킵니다.</p>
+                        </div>
+                    </div>`;
+        } else if (type === 'faq') {
+          title.textContent = '❓ 자주 묻는 질문 (FAQ) 종합 안내';
+          body.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="p-5 bg-white border border-gray-100 rounded-2xl shadow-xs"><p class="font-bold text-sm text-purple-700">Q. 여러 전공에 중복으로 지원해도 되나요?</p><p class="text-xs text-gray-600 mt-1">A. 가장 집중 크리틱을 받고 싶은 1개 전공 선택을 원칙으로 하되, 연계 예술경영이나 디지털아트 융합을 원할 시 기획서 비고란에 적어주시면 연계 매칭됩니다.</p></div>
+                        <div class="p-5 bg-white border border-gray-100 rounded-2xl shadow-xs"><p class="font-bold text-sm text-purple-700">Q. 비용이나 다른 자격 요건이 있나요?</p><p class="text-xs text-gray-600 mt-1">A. 서울예술대학교 입시를 준비하는 예비 예술가라면 누구나 무료로 참가할 수 있는 순수 창작자 지원 프로그램입니다.</p></div>
+                    </div>`;
+        }
+      }
+
+      function closeInfoView() {
+        const overlay = document.getElementById('info-view-overlay');
+        overlay.classList.add('translate-y-full');
+        setTimeout(() => overlay.classList.add('hidden'), 300);
+        document.body.style.overflow = 'unset';
+      }
+
+      // 초기화 엔진
+      function initGallery() {
+        const grid = document.getElementById('gallery-grid');
+        grid.innerHTML = '';
+        workData.forEach((item) => {
+          grid.innerHTML += `
+                    <div class="space-y-2.5 group cursor-pointer gallery-card" data-faculty="${item.faculty}" onclick="openReviewModal('💡 ${item.name}전공 비포&애프터', '${item.detail}')">
+                        <div class="aspect-4/3 bg-white border border-gray-100 rounded-2xl overflow-hidden relative shadow-xs transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md flex flex-col items-center justify-center p-4">
+                            <span class="text-3xl mb-1">${getDeptEmoji(item.name)}</span>
+                            <span class="text-[11px] font-black text-purple-700 tracking-tight">${item.name}전공</span>
+                            <div class="absolute bottom-2 left-2 bg-[#111111]/85 text-white text-[9px] px-2 py-0.5 rounded font-light">${item.faculty}</div>
+                        </div>
+                        <div class="px-1">
+                            <h4 class="text-xs font-bold text-gray-800 truncate group-hover:text-purple-600">${item.title}</h4>
+                            <p class="text-[10px] text-gray-400 mt-0.5 truncate">가이드: <span class="text-gray-700 font-medium">${item.kw}</span></p>
+                        </div>
+                    </div>
+                `;
+        });
+
+        // 모달 드롭다운 가동
+        const select = document.getElementById('modal-dept-select');
+        select.innerHTML =
+          '<option value="">피드백 신청할 전공을 선택해 주세요</option>';
+        const faculties = [...new Set(depts.map((d) => d.f))];
+        faculties.forEach((f) => {
+          let optGroup = document.createElement('optgroup');
+          optGroup.label = f;
+          depts
+            .filter((d) => d.f === f)
+            .forEach((dept) => {
+              let opt = document.createElement('option');
+              opt.value = `${f} - ${dept.n}전공`;
+              opt.textContent = `${dept.n}전공`;
+              optGroup.appendChild(opt);
+            });
+          select.appendChild(optGroup);
+        });
+      }
+
+      function getDeptEmoji(name) {
+        const target = depts.find((d) => d.n === name);
+        return target ? target.i : '✨';
+      }
+
+      function filterGallery(faculty) {
+        const buttons = document.querySelectorAll('.gallery-tab-btn');
+        buttons.forEach((btn) => {
+          btn.classList.remove('bg-purple-600', 'text-white');
+          btn.classList.add('bg-white', 'border-gray-200', 'text-gray-600');
+        });
+        event.target.classList.remove(
+          'bg-white',
+          'border-gray-200',
+          'text-gray-600',
+        );
+        event.target.classList.add('bg-purple-600', 'text-white');
+
+        const cards = document.querySelectorAll('.gallery-card');
+        cards.forEach((card) => {
+          if (
+            faculty === 'all' ||
+            card.getAttribute('data-faculty') === faculty
+          ) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }
+
+      function openModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+        document.body.style.overflow = 'unset';
+      }
+      function openApplyModal() {
+        openModal('apply-modal');
+      }
+
+      function openReviewModal(title, content) {
+        document.getElementById('detail-title').innerHTML = title;
+        document.getElementById('detail-content').innerHTML = content;
+        openModal('detail-modal');
+      }
+
+      function openAllReviewsModal() {
+        let reviewListHTML = '<div class="space-y-4">';
+        workData.slice(0, 5).forEach((w) => {
+          reviewListHTML += `
+                    <div class="p-3 bg-white border border-gray-100 rounded-xl shadow-xs">
+                        <p class="text-xs font-bold text-purple-600">서울예대 [${w.faculty} ${w.name}전공] 참여 선배후기</p>
+                        <p class="text-xs text-gray-700 mt-1 font-light">"초안이었던 [${w.title}]의 피드백 세션 덕분에 크리에이티브 스케일을 [${w.kw}] 방향으로 디벨롭 시킬 수 있었습니다."</p>
+                    </div>`;
+        });
+        reviewListHTML += '</div>';
+        openReviewModal('💬 지난 참여자 전체 후기', reviewListHTML);
+      }
+
+      function submitForm(event) {
+        event.preventDefault();
+        alert(
+          '🚀 제출 완료!\n선택하신 학부의 전공 교수 및 선배 크루 매칭 결과 안내가 발송됩니다.',
+        );
+        closeModal('apply-modal');
+      }
+
+      window.onclick = function (event) {
+        if (event.target.classList.contains('modal-bg')) {
+          event.target.classList.add('hidden');
+          document.body.style.overflow = 'unset';
+        }
+      };
+
+      window.onload = initGallery;
+    </script>
+  </body>
+</html>
